@@ -1,0 +1,77 @@
+package org.serratec.exercicio01.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.serratec.exercicio01.domain.Aluno;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/aluno")
+public class AlunoController {
+	
+	private static List<Aluno> alunos = new ArrayList<>();
+	static {
+		alunos.add(new Aluno(1l, "Gabriel", "66276721"));
+		alunos.add(new Aluno(2l, "Leandro", "73937721"));
+		alunos.add(new Aluno(3l, "Pedro", "01886721"));
+		alunos.add(new Aluno(4l, "João", "17736721"));
+	}
+	
+	@GetMapping
+	public List<Aluno> listaAlunos() {
+		return alunos;
+	}
+	
+	@GetMapping("/{matricula}")
+	public Aluno buscarAluno(@PathVariable Long matricula) {
+		for (int i = 0; i < alunos.size(); i++) {
+			Aluno aluno = alunos.get(i);
+			if (aluno.getMatricula().equals(matricula)) {
+				return aluno;
+			}
+		}
+	return null;
+	}
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Aluno inserir(@RequestBody Aluno aluno) {
+		alunos.add(aluno);
+		return aluno;
+	}
+	
+	@DeleteMapping("/{matricula}")
+	public void deletar(@PathVariable Long matricula) {
+		for (int i = 0; i < alunos.size(); i++) {
+			Aluno aluno = alunos.get(i);
+			if (aluno.getMatricula().equals(matricula)) {
+				alunos.remove(i);
+				return;
+			}
+		}
+	}
+	
+	@PutMapping("/{matricula}")
+	public Aluno atualizar(@PathVariable Long matricula, @RequestBody Aluno aluno) {
+		for (int i = 0; i < alunos.size(); i++) {
+			Aluno alunoLista = alunos.get(i);
+			if (aluno.getMatricula().equals(matricula)) {
+				alunoLista.setNome(aluno.getNome());
+				alunoLista.setTelefone(aluno.getTelefone());
+				alunos.set(i, alunoLista);
+				return alunoLista;
+			}
+		}
+	return null;
+	}
+}

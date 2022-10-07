@@ -1,0 +1,5 @@
+package org.serratec.exercicio01.domain;
+
+public class Produto {
+
+}
