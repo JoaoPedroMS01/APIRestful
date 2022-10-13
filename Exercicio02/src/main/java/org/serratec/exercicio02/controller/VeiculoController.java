@@ -1,10 +1,15 @@
 package org.serratec.exercicio02.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.serratec.exercicio02.domain.Veiculo;
+import org.serratec.exercicio02.repository.VeiculoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,58 +23,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/veiculo")
 public class VeiculoController {
-	
-	private static List<Veiculo> veiculos = new ArrayList<>();
-	static {
-		veiculos.add(new Veiculo(1, "Ford", "Mustang"));
-		veiculos.add(new Veiculo(2, "Fiat", "Uno"));
-		veiculos.add(new Veiculo(3, "Honda", "Civic"));
-	}
-	
+	@Autowired
+	VeiculoRepository veiculoRepository;
+
 	@GetMapping
-	public List<Veiculo> listarVeiculos() {
-		return veiculos;
+	public List<Veiculo> listaVeiculos() {
+		return veiculoRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public Veiculo buscarVeiculo(@PathVariable Integer id) {
-		for (int i = 0; i < veiculos.size(); i++) {
-			Veiculo veiculo = veiculos.get(i);
-			if (veiculo.getId().equals(id)) {
-				return veiculo;
-			}
+	public ResponseEntity<Veiculo> pesquisar(@PathVariable Long id) {
+		Optional<Veiculo> veiculo = veiculoRepository.findById(id);
+		if (veiculo.isPresent()) {
+			return ResponseEntity.ok(veiculo.get());
 		}
-	return null;
+		return ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Veiculo adicionar(@RequestBody Veiculo veiculo) {
-		veiculos.add(veiculo);
-		return veiculo;
+	public Veiculo inserir(@Valid @RequestBody Veiculo veiculo) {
+		return veiculoRepository.save(veiculo);
 	}
-	
-	@DeleteMapping("/{id}")
-	public void deletar(@PathVariable Integer id) {
-		for (int i = 0; i < veiculos.size(); i++) {
-			Veiculo veiculo = veiculos.get(i);
-			if (veiculo.getId().equals(id)) {
-				veiculos.remove(i);
-			}
-		}
-	}
-	
+
 	@PutMapping("/{id}")
-	public Veiculo atualizar(@PathVariable Integer id, @RequestBody Veiculo veiulo) {
-		for (int i = 0; i < veiculos.size(); i++) {
-			Veiculo veiculo = veiculos.get(i);
-			if (veiculo.getId().equals(id)) {
-				veiculo.setMarca(veiculo.getMarca());
-				veiculo.setModelo(veiculo.getModelo());
-				return veiculo;
-			}
+	public ResponseEntity<Veiculo> alterar(@PathVariable Long id, @Valid @RequestBody Veiculo veiculo) {
+
+		if (!veiculoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
 		}
-	return null;
+		veiculo.setId(id);
+		return ResponseEntity.ok(veiculoRepository.save(veiculo));
 	}
-	
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> apagar(@PathVariable Long id) {
+		if (!veiculoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		}
+		veiculoRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
 }

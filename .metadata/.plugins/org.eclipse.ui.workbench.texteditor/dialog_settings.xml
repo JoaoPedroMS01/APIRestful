@@ -2,15 +2,22 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Double"/>
+		<item key="selection" value="servico"/>
 		<list key="findhistory">
+			<item value="proprietario"/>
+			<item value="Proprietario"/>
+			<item value="Veiculo"/>
 			<item value="Integer"/>
 		</list>
 		<list key="replacehistory">
+			<item value="servico"/>
+			<item value="Servico"/>
+			<item value="proprietario"/>
+			<item value="Proprietario"/>
 			<item value="Double"/>
 		</list>
 	</section>

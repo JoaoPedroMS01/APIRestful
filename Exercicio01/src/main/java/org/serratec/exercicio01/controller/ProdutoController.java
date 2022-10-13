@@ -3,6 +3,8 @@ package org.serratec.exercicio01.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.serratec.exercicio01.domain.Produto;
 import org.serratec.exercicio01.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +41,13 @@ public class ProdutoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Produto> inserir(@RequestBody Produto produto) {
+	public ResponseEntity<Produto> inserir(@Valid @RequestBody Produto produto) {
 		Produto produtoInserido = produtoRepository.save(produto);
 		return ResponseEntity.status(HttpStatus.CREATED).header("x-data", "01/01/10").body(produtoInserido);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
 		Optional<Produto> optionalProduto = produtoRepository.findById(id);
 		if (optionalProduto.isPresent()) {
 			Produto produtoBanco = optionalProduto.get();

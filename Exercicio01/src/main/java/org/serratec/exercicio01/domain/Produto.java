@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,6 +21,8 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	@NotBlank(message = "A descrição não pode ficar em branco.")
+	@Size(min = 5, max = 40, message = "A descrição deve ter entre {min} e {max} caracteres.")
 	@Column(name = "descricao", nullable = false, length = 40)
 	private String descricao;
 	@Column(name = "valor", nullable = false)
