@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
+	<item id="NodeList/DBNDatabaseFolder">
+		<column name="Nome" visible="true" order="0" width="124"/>
+	</item>
+	<item id="NodeList/PostgreExtension">
+		<column name="Nome" visible="true" order="0" width="100"/>
+		<column name="Versão " visible="true" order="1" width="100"/>
+		<column name="Relocável" visible="true" order="2" width="100"/>
+		<column name="Esquema " visible="true" order="3" width="100"/>
+		<column name="Tabelas" visible="true" order="4" width="100"/>
+		<column name="Condições" visible="true" order="5" width="100"/>
+	</item>
+	<item id="NodeList/PostgreInformation/DBNDatabaseFolder">
+		<column name="Nome" visible="true" order="0" width="218"/>
+	</item>
 	<item id="NodeList/PostgreSchema">
 		<column name="Nome" visible="true" order="0" width="100"/>
 		<column name="Comentario" visible="true" order="1" width="140"/>
+	</item>
+	<item id="NodeList/PostgreSetting">
+		<column name="Name" visible="true" order="0" width="242"/>
+		<column name="Value" visible="true" order="1" width="300"/>
+		<column name="Unit" visible="true" order="2" width="100"/>
 	</item>
 	<item id="NodeList/PostgreTableColumn">
 		<column name="Nome da coluna" visible="true" order="0" width="111"/>

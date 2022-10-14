@@ -6,6 +6,11 @@
 			"driver": "postgres-jdbc",
 			"name": "postgres",
 			"save-password": true,
+			"show-system-objects": true,
+			"show-util-objects": true,
+			"navigator-show-only-entities": true,
+			"navigator-hide-folders": true,
+			"navigator-hide-virtual": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
@@ -16,7 +21,7 @@
 				"home": "postgresql-x64-14",
 				"type": "dev",
 				"provider-properties": {
-					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-non-default-db@": "true",
 					"@dbeaver-show-template-db@": "false",
 					"@dbeaver-show-unavailable-db@": "false",
 					"show-database-statistics": "false",
@@ -26,8 +31,7 @@
 					"postgresql.dd.plain.string": "false",
 					"postgresql.dd.tag.string": "false"
 				},
-				"auth-model": "native",
-				"handlers": {}
+				"auth-model": "native"
 			}
 		}
 	},
