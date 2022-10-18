@@ -6,14 +6,20 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="servico"/>
+		<item key="selection" value="autor"/>
 		<list key="findhistory">
-			<item value="proprietario"/>
+			<item value="livro"/>
+			<item value="Livro"/>
 			<item value="Proprietario"/>
+			<item value="proprietario"/>
 			<item value="Veiculo"/>
 			<item value="Integer"/>
 		</list>
 		<list key="replacehistory">
+			<item value="autor"/>
+			<item value="Autor"/>
+			<item value="Livro"/>
+			<item value="livro"/>
 			<item value="servico"/>
 			<item value="Servico"/>
 			<item value="proprietario"/>
